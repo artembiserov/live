@@ -11,11 +11,13 @@ class Live
   end
 
   def run
-    until @history.include?(@state)
+    while !@history.include?(@state) && @state.has_live?
       StatePresenter.render(@state)
       @history.add(@state)
       @state = State.build_from_previous(@state)
     end
+
+    StatePresenter.render(@state)
   end
 end
 

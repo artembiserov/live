@@ -31,6 +31,10 @@ class Live
       end
     end
 
+    def has_live?
+      array.flatten.any? { |el| el[:live] }
+    end
+
     def [](index)
       array[index]
     end
