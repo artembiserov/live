@@ -12,6 +12,13 @@ class Live
       end
     end
 
+    def self.build_from_previous(state)
+      new.tap do |new_state|
+        new_state.array = state.map_to_array { |el| { live: el[:live_in_feature] } }
+        new_state.predict_next_state
+      end
+    end
+
     def predict_next_state
       each_with_index do |line, i|
         line.each_with_index do |el, j|
@@ -33,13 +40,11 @@ class Live
     end
 
     def ==(other)
-      map_to_array == other.map_to_array
+      map_to_array { |el| el[:live] } == other.map_to_array { |el| el[:live] }
     end
 
-    protected
-
-    def map_to_array
-      map { |line| line.map { |el| el[:live] } }
+    def map_to_array(&block)
+      map { |line| line.map { |el| block.call(el) } }
     end
 
     private
