@@ -32,6 +32,16 @@ class Live
       array.each(&block)
     end
 
+    def ==(other)
+      map_to_array == other.map_to_array
+    end
+
+    protected
+
+    def map_to_array
+      map { |line| line.map { |el| el[:live] } }
+    end
+
     private
 
     def possible_neighbors_count_for_live
