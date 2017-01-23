@@ -1,6 +1,7 @@
 module Live
   class FileReader
     AVAILABLE_STATES = %w(0 1)
+
     def read_file(file_name)
       data = File
         .read(file_name)

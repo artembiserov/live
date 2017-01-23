@@ -4,6 +4,15 @@ module Live
     DEAD = "0".freeze
     ALLOWED_ALIVE_NEIGHBORS = [2, 3].freeze
 
+    # example state = [
+    #   ['1', '1', '1', '0'],
+    #   ['0', '0', '0', '1']
+    # ]
+    # Returns next state  
+    # example = [
+    #   ['1', '1', '1', '0'],
+    #   ['0', '0', '0', '0']
+    # ]
     def generate_next_state(state)
       state.map.with_index do |line, i|
         line.map.with_index do |el, j|
